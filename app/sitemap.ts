@@ -1,0 +1,2 @@
+import type { MetadataRoute } from "next"; import { journeys } from "./data";
+export default function sitemap(): MetadataRoute.Sitemap { const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com"; const pages=["","/journeys","/about","/contact","/privacy","/terms"]; return ["ar","en"].flatMap(lang=>[...pages.map(p=>({url:`${base}/${lang}${p}`,changeFrequency:"weekly" as const,priority:p===""?1:.7})),...journeys.map(j=>({url:`${base}/${lang}/journeys/${j.slug}`,changeFrequency:"weekly" as const,priority:.8}))]); }
